@@ -6,10 +6,12 @@ import MusicPlayer from "./MusicPlayer";
 import MusicPrompt from "./MusicPrompt";
 import React, { useState } from "react";
 
+
 function App() {
   const [playMusic, setPlayMusic] = useState(false);
   const [promptAnswered, setPromptAnswered] = useState(false);
-
+  
+  const backgroundImage = '/BGPNG.png'
   const handleAccept = () => {
     setPlayMusic(true);
     setPromptAnswered(true);
@@ -20,7 +22,14 @@ function App() {
     setPromptAnswered(true);
   };
   return (
-    <div className="container">
+    <div className="container" 
+      style={{ 
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+      width: "100vw"
+    }}>
       <Title />
       <MusicPlayer />
       <div>
