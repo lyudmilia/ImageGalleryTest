@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CornerImage = ({ isOpen }) => {
-    const reading = './FWMC.png'
+    const reading = './FWMC1.png'
     const notReading = './FWMC2.png'
   return (
     <img 
