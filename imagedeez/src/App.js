@@ -11,7 +11,7 @@ function App() {
   const [playMusic, setPlayMusic] = useState(false);
   const [promptAnswered, setPromptAnswered] = useState(false);
   
-  const backgroundImage = '/BGPNG.png'
+  const backgroundImage = '/BGJPG.jpg'
   const handleAccept = () => {
     setPlayMusic(true);
     setPromptAnswered(true);
