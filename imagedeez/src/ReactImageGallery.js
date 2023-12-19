@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import React, { useState } from "react";
+import Masonry from "react-responsive-masonry";
 import withZoomPan from "./withZoomPan";
-import Modal from "react-modal";
 import ImageOverlay from "./ImageOverlay";
 import images from "./Images";
 import CornerImage from "./CornerImage";
+import GalleryImage from "./GalleryImage";
+import GalleryModal from "./GalleryModal";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ReactImageGallery = () => {
   const ZoomPanMasonry = withZoomPan(Masonry);
+  // eslint-disable-next-line
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -19,7 +22,6 @@ const ReactImageGallery = () => {
     setCurrentImageIndex(index);
     setIsOpen(true);
   };
-  
 
   const handleClose = () => {
     setIsOpen(false);
@@ -27,7 +29,7 @@ const ReactImageGallery = () => {
 
   let overlayImages = [];
 
-  for (let i = 0; i < 144; i++) {
+  for (let i = 0; i < 208; i++) {
     overlayImages.push("split/part_" + i + ".png");
   }
 
@@ -36,79 +38,30 @@ const ReactImageGallery = () => {
     images[nextIndex].clicked = true;
     setCurrentImageIndex(nextIndex);
   };
-  
+
   const handlePrevious = () => {
     const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
     images[prevIndex].clicked = true;
     setCurrentImageIndex(prevIndex);
   };
+
   return (
     <div className="div2">
-      <ZoomPanMasonry columnsCount={16} gutter="0px">
+      <ZoomPanMasonry columnsCount={13} gutter="0px">
         {images.map((image, i) => (
           <ImageOverlay overlaySrc={overlayImages[i % overlayImages.length]}>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <img
-                src={image.src}
-                style={{ width: "100%", display: "block" }}
-                onClick={() => handleZoom(image)}
-              />
-              {image.clicked && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "rgba(0, 255, 0, 0)",
-                  }}
-                  onMouseOver={(e) =>
-                    (e.target.style.backgroundColor = "rgba(0, 255, 0, 0.5)")
-                  }
-                  onMouseOut={(e) =>
-                    (e.target.style.backgroundColor = "rgba(0, 255, 0, 0)")
-                  }
-                />
-              )}
-            </div>
+            <GalleryImage image={image} onZoom={handleZoom} />
           </ImageOverlay>
         ))}
       </ZoomPanMasonry>
 
-      <Modal
+      <GalleryModal
         isOpen={isOpen}
         onRequestClose={handleClose}
-        style={{
-          content: {
-            width: "50%",
-            height: "50%",
-            margin: "auto",
-          },
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <button onClick={handlePrevious}>Previous</button>
-          <img
-            src={images[currentImageIndex].src}
-            style={{ width: "30%", height: "auto" }}
-          />
-          <button onClick={handleNext}>Next</button>
-        </div>
-        <div>{images[currentImageIndex].description}</div>
-      </Modal>
+        image={images[currentImageIndex]}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+      />
       <CornerImage isOpen={isOpen} />
     </div>
   );

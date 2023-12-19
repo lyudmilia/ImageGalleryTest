@@ -8,7 +8,7 @@ const CornerImage = ({ isOpen }) => {
       src={isOpen ? notReading : reading} 
       alt="Corner" 
       style={{ 
-        position: 'absolute', 
+        position: 'fixed', 
         bottom: '0', 
         right: '0', 
         width: '20%', 

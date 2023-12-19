@@ -6,6 +6,9 @@ import MusicPlayer from "./MusicPlayer";
 import MusicPrompt from "./MusicPrompt";
 import React, { useState } from "react";
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+</style>
 
 function App() {
   const [playMusic, setPlayMusic] = useState(false);
@@ -22,12 +25,13 @@ function App() {
     setPromptAnswered(true);
   };
   return (
+    
     <div className="container" 
       style={{ 
       backgroundImage: `url(${backgroundImage})`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
-      height: "100vh",
+      height: "200vh",
       width: "100vw"
     }}>
       <Title />
