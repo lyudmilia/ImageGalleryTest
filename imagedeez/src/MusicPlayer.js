@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function MusicPlayer({ playMusic }) {
   const [volume, setVolume] = useState(0.5);  // Sets the initial volume to 50%
+  const [isPlaying, setIsPlaying] = useState(playMusic);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -18,17 +19,17 @@ function MusicPlayer({ playMusic }) {
   const handlePausePlayClick = () => {
     if (audioRef.current.paused) {
       audioRef.current.play();
+      setIsPlaying(true);
     } else {
       audioRef.current.pause();
+      setIsPlaying(false);
     }
   };
 
   return (
-    <div style={{ position: 'absolute', top: 0, right: 0 }}>
-      <button onClick={handlePausePlayClick}>
-        {audioRef.current && audioRef.current.paused ? 'Play' : 'Pause'}
-      </button>
-      <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} />
+    <div className="music-player">
+      <img src={isPlaying ? "buttons/paws.png" : "buttons/play.png"} alt="Play/Pause" onClick={handlePausePlayClick} className="play-pause-image" />
+      <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} className="volume-slider" />
       <audio ref={audioRef} autoPlay={playMusic} loop src="bgm.ogg" />
     </div>
   );

@@ -1,14 +1,11 @@
 import ReactImageGallery from "./ReactImageGallery";
 import Title from "./Title";
 import Footer from "./Footer";
-import "./App.css";
 import MusicPlayer from "./MusicPlayer";
 import MusicPrompt from "./MusicPrompt";
 import React, { useState } from "react";
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
-</style>
+import { ToastContainer } from 'react-toastify';
+import "./App.css";
 
 function App() {
   const [playMusic, setPlayMusic] = useState(false);
@@ -25,7 +22,6 @@ function App() {
     setPromptAnswered(true);
   };
   return (
-    
     <div className="container" 
       style={{ 
       backgroundImage: `url(${backgroundImage})`,
@@ -34,14 +30,13 @@ function App() {
       height: "200vh",
       width: "100vw"
     }}>
+      <ToastContainer />
+      {!promptAnswered ? (
+        <MusicPrompt onAccept={handleAccept} onDecline={handleDecline} />
+      ) : (
+        <MusicPlayer playMusic={playMusic} />
+      )}
       <Title />
-      <MusicPlayer />
-      <div>
-        {!promptAnswered && (
-          <MusicPrompt onAccept={handleAccept} onDecline={handleDecline} />
-        )}
-        {promptAnswered && <MusicPlayer playMusic={playMusic} />}
-      </div>
       <ReactImageGallery />
       <Footer />
     </div>

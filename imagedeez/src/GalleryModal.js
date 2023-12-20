@@ -21,12 +21,22 @@ function GalleryModal({ isOpen, onRequestClose, image, onNext, onPrevious }) {
           justifyContent: "space-between",
         }}
       >
-        <button onClick={onPrevious}>Previous</button>
+        <img  
+          style={{ cursor: "pointer", width: "10%", height: "auto" }}
+          src="buttons/prev.png" 
+          onClick={onPrevious} 
+          alt="Previous"
+        />
         <img
           src={image.src}
           style={{ width: "30%", height: "auto" }}
         />
-        <button onClick={onNext}>Next</button>
+        <img 
+          style={{ cursor: "pointer", width: "10%", height: "auto" }}
+          src="buttons/next.png" 
+          onClick={onNext} 
+          alt="Next" 
+        />
       </div>
       <div class="desc">{image.description}</div>
       

@@ -6,6 +6,8 @@ import images from "./Images";
 import CornerImage from "./CornerImage";
 import GalleryImage from "./GalleryImage";
 import GalleryModal from "./GalleryModal";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ReactImageGallery = () => {
@@ -45,6 +47,16 @@ const ReactImageGallery = () => {
     setCurrentImageIndex(prevIndex);
   };
 
+  const resetImages = () => {
+    images.forEach((image) => {
+      image.clicked = false;
+    });
+    setCurrentImage(images[0]);
+    setCurrentImageIndex(0);
+    toast.success("Every image has been reset.");
+  };
+  
+
   return (
     <div className="div2">
       <ZoomPanMasonry columnsCount={13} gutter="0px">
@@ -63,6 +75,7 @@ const ReactImageGallery = () => {
         onPrevious={handlePrevious}
       />
       <CornerImage isOpen={isOpen} />
+      <img className="resetButton" src="buttons/reset.png" onClick={resetImages} />
     </div>
   );
 };
