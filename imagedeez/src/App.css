@@ -20,7 +20,6 @@
   flex:70%;
   width: 50%; 
   margin: auto; 
-
 }
 
 .div3 {
@@ -41,6 +40,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-size: 1vw;
   background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
   z-index: 9999;
 }
@@ -49,23 +49,37 @@
   background-color: white;
   padding: 20px;
   border-radius: 10px; /* rounded corners */
+  display: flex; /* added */
+  flex-direction: column; /* added */
+  align-items: center; /* added */
+  justify-content: center; /* added */
 }
+
+.image-container { /* added this class */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.prompt-image {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  cursor: pointer;
+}
+
 
 .desc {
   padding: 3vh;
-  font-size: medium;
+  font-size: 1vw;
 }
 
 .auth {
   padding-top: 0vh;
-  padding-left: 60vh;
+  padding-left: 20vw;
+  font-size: 1vw;
 }
 
-.prompt-image {
-  width: 40%;
-  height: auto;
-  cursor: pointer;
-}
 
 .music-player {
   position: fixed;
@@ -94,10 +108,25 @@
   margin-right: auto;
   width: 100px;
   order:2;
+
 }
 
-.resetButton{
+.button-container {
+  position: relative;
+  width: 100%;
+}
+
+.galleryButtons {
   cursor: pointer;
-  width: 15%;
+  width: 10%;
   height: auto;
+  position: absolute;
+}
+
+.left-button {
+  left: 0;
+}
+
+.right-button {
+  right: 0;
 }

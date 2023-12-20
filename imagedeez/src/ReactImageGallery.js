@@ -6,8 +6,8 @@ import images from "./Images";
 import CornerImage from "./CornerImage";
 import GalleryImage from "./GalleryImage";
 import GalleryModal from "./GalleryModal";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ReactImageGallery = () => {
@@ -16,6 +16,7 @@ const ReactImageGallery = () => {
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [overlayOpacity, setOverlayOpacity] = useState(0.75);
 
   const handleZoom = (image) => {
     image.clicked = true;
@@ -47,6 +48,10 @@ const ReactImageGallery = () => {
     setCurrentImageIndex(prevIndex);
   };
 
+  const handleOverlayOpacity = () => {
+    setOverlayOpacity((prevOpacity) => (prevOpacity === 1 ? 0.75 : 1)); // toggle between 1 and 0.75
+  };
+
   const resetImages = () => {
     images.forEach((image) => {
       image.clicked = false;
@@ -55,13 +60,15 @@ const ReactImageGallery = () => {
     setCurrentImageIndex(0);
     toast.success("Every image has been reset.");
   };
-  
 
   return (
     <div className="div2">
       <ZoomPanMasonry columnsCount={13} gutter="0px">
         {images.map((image, i) => (
-          <ImageOverlay overlaySrc={overlayImages[i % overlayImages.length]}>
+          <ImageOverlay
+            overlaySrc={overlayImages[i % overlayImages.length]}
+            overlayOpacity={overlayOpacity}
+          >
             <GalleryImage image={image} onZoom={handleZoom} />
           </ImageOverlay>
         ))}
@@ -75,7 +82,25 @@ const ReactImageGallery = () => {
         onPrevious={handlePrevious}
       />
       <CornerImage isOpen={isOpen} />
-      <img className="resetButton" src="buttons/reset.png" onClick={resetImages} />
+      <div className="button-container">
+        <img
+          className="galleryButtons left-button"
+          src={
+            overlayOpacity === 1 ? "buttons/mosaic.png" : "buttons/fullimg.png"
+          }
+          onClick={handleOverlayOpacity}
+          alt={
+            overlayOpacity === 1
+              ? "Set Overlay Opacity to 75%"
+              : "Set Overlay Opacity to 100%"
+          }
+        />
+        <img
+          className="galleryButtons right-button"
+          src="buttons/reset.png"
+          onClick={resetImages}
+        />
+      </div>
     </div>
   );
 };

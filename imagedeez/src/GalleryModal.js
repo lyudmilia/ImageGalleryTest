@@ -7,10 +7,11 @@ function GalleryModal({ isOpen, onRequestClose, image, onNext, onPrevious }) {
       onRequestClose={onRequestClose}
       style={{
         content: {
-          width: "50%",
-          height: "50%",
+          width: "80vw",
+          height: "80vh",
           margin: "auto",
           position: "relative",
+          borderRadius: "15px", // This line adds rounded corners
         },
       }}
     >
