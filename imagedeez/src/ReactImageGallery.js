@@ -17,8 +17,6 @@ const ReactImageGallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [overlayOpacity, setOverlayOpacity] = useState(0.75);
-  const fuwahallo = new Audio("/Fuwa_Hallo.mp3");
-  const mocosneeze = new Audio("/mocosneeze100.mp3");
 
   const handleZoom = (image) => {
     image.clicked = true;
@@ -26,9 +24,6 @@ const ReactImageGallery = () => {
     const index = images.indexOf(image);
     setCurrentImageIndex(index);
     setIsOpen(true);
-
-    const sound = index % 2 === 0 ? fuwahallo : mocosneeze ;
-    sound.play();
   };
 
 
